@@ -46,6 +46,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="photoView" destination="xIS-He-bB5" id="tAp-rP-cDi"/>
+                                            <segue destination="hYF-OF-gas" kind="show" id="5kX-ou-W9i"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -78,18 +79,17 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="62g-S6-dmD">
-                                <rect key="frame" x="16" y="237" width="343" height="193"/>
+                                <rect key="frame" x="8" y="72" width="359" height="202"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="62g-S6-dmD" secondAttribute="height" multiplier="16:9" id="eKh-v1-BqI"/>
+                                    <constraint firstAttribute="width" secondItem="62g-S6-dmD" secondAttribute="height" multiplier="16:9" id="XRK-dx-vNG"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="62g-S6-dmD" firstAttribute="centerX" secondItem="AZN-Wh-zYe" secondAttribute="centerX" id="8Jx-Mv-oNV"/>
-                            <constraint firstItem="62g-S6-dmD" firstAttribute="centerY" secondItem="AZN-Wh-zYe" secondAttribute="centerY" id="L0k-ym-YOC"/>
-                            <constraint firstItem="zCU-zL-hkQ" firstAttribute="trailing" secondItem="62g-S6-dmD" secondAttribute="trailing" constant="16" id="aiX-Ir-ckU"/>
-                            <constraint firstItem="62g-S6-dmD" firstAttribute="leading" secondItem="zCU-zL-hkQ" secondAttribute="leading" constant="16" id="yWC-NC-7wb"/>
+                            <constraint firstItem="62g-S6-dmD" firstAttribute="top" secondItem="zCU-zL-hkQ" secondAttribute="top" constant="8" id="99b-UC-qGZ"/>
+                            <constraint firstItem="62g-S6-dmD" firstAttribute="leading" secondItem="zCU-zL-hkQ" secondAttribute="leading" constant="8" id="Gvy-Uq-M4C"/>
+                            <constraint firstItem="zCU-zL-hkQ" firstAttribute="trailing" secondItem="62g-S6-dmD" secondAttribute="trailing" constant="8" id="IZR-JG-AVg"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="zCU-zL-hkQ"/>
                     </view>
@@ -100,7 +100,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rWj-2C-3MM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1527" y="27"/>
+            <point key="canvasLocation" x="1594" y="27"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="1GX-aR-LRr">

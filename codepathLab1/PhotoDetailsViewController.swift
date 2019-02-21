@@ -11,13 +11,24 @@ import AlamofireImage
 
 class PhotoDetailsViewController: UIViewController {
 
-    var image: UIImage!
+    //var to store the passed JSON dict
+    var passedDict: [String: Any] = [:]
+    
     @IBOutlet weak var detailImageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        detailImageView.image = image
+        
+        //nil protection and grabbing the "photos" chunk from the passed dict
+        if let photos = passedDict["photos"] as? [[String: Any]]{ //[[String : Any]] list of String: Any dict
+            
+            let mainVC = PhotosViewController() //an object to get access to PhotosViewController()
+            
+            //calling the func from the VC using our object
+            let url = mainVC.returnsURL(with: photos)
+            
+            detailImageView.af_setImage(withURL: url)
+        }
     }
 
 }
