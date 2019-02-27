@@ -68,7 +68,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="806" y="27"/>
+            <point key="canvasLocation" x="38" y="745"/>
         </scene>
         <!--Photo Details View Controller-->
         <scene sceneID="7mj-Ly-Ine">
@@ -78,11 +78,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="62g-S6-dmD">
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="62g-S6-dmD">
                                 <rect key="frame" x="8" y="72" width="359" height="202"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="62g-S6-dmD" secondAttribute="height" multiplier="16:9" id="XRK-dx-vNG"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="EHl-aX-n3n" appends="YES" id="wGa-lc-KbJ"/>
+                                </connections>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -96,11 +100,75 @@
                     <navigationItem key="navigationItem" id="RRi-Bl-Rna"/>
                     <connections>
                         <outlet property="detailImageView" destination="62g-S6-dmD" id="2JR-ro-k6i"/>
+                        <segue destination="aBm-mV-rGh" kind="presentation" identifier="FullScreenPhotoViewController" id="Hda-BG-Pt3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rWj-2C-3MM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="EHl-aX-n3n">
+                    <connections>
+                        <action selector="tapGesture:" destination="hYF-OF-gas" id="vNJ-Ys-y5S"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1594" y="27"/>
+            <point key="canvasLocation" x="38" y="1442"/>
+        </scene>
+        <!--Full Screen Photo View Controller-->
+        <scene sceneID="jvZ-wk-6Xw">
+            <objects>
+                <viewController id="aBm-mV-rGh" customClass="FullScreenPhotoViewController" customModule="codepathLab1" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="AhD-in-hua">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uuJ-ew-8Qg">
+                                <rect key="frame" x="0.0" y="20" width="70" height="59"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="59" id="bDI-np-gv0"/>
+                                    <constraint firstAttribute="width" constant="70" id="qHQ-K3-u37"/>
+                                </constraints>
+                                <state key="normal" title="Close"/>
+                                <connections>
+                                    <action selector="exitbutton:" destination="aBm-mV-rGh" eventType="touchUpInside" id="Mdz-rt-XbZ"/>
+                                </connections>
+                            </button>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" maximumZoomScale="10" translatesAutoresizingMaskIntoConstraints="NO" id="HLv-Bc-Vbs">
+                                <rect key="frame" x="0.0" y="111" width="375" height="556"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3eJ-iS-CzX">
+                                        <rect key="frame" x="8" y="8" width="359" height="232"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="232" id="fIj-od-CSi"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="3eJ-iS-CzX" firstAttribute="trailing" secondItem="HLv-Bc-Vbs" secondAttribute="trailingMargin" id="IJF-yn-g9M"/>
+                                    <constraint firstItem="3eJ-iS-CzX" firstAttribute="leading" secondItem="HLv-Bc-Vbs" secondAttribute="leadingMargin" id="NZ5-dj-3cE"/>
+                                    <constraint firstItem="3eJ-iS-CzX" firstAttribute="centerX" secondItem="HLv-Bc-Vbs" secondAttribute="centerX" id="Nug-Fa-eLe"/>
+                                    <constraint firstAttribute="bottom" secondItem="3eJ-iS-CzX" secondAttribute="bottom" constant="316" id="Qtm-ob-sVa"/>
+                                    <constraint firstItem="3eJ-iS-CzX" firstAttribute="top" secondItem="HLv-Bc-Vbs" secondAttribute="topMargin" id="l6X-g6-liV"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="uuJ-ew-8Qg" firstAttribute="top" secondItem="v7X-Nt-Dmn" secondAttribute="top" id="7QV-nn-B37"/>
+                            <constraint firstItem="HLv-Bc-Vbs" firstAttribute="bottom" secondItem="v7X-Nt-Dmn" secondAttribute="bottom" id="PPq-fS-JIB"/>
+                            <constraint firstAttribute="trailing" secondItem="HLv-Bc-Vbs" secondAttribute="trailing" id="Vbe-vl-Xp6"/>
+                            <constraint firstItem="HLv-Bc-Vbs" firstAttribute="leading" secondItem="uuJ-ew-8Qg" secondAttribute="leading" id="fBI-3D-caG"/>
+                            <constraint firstItem="uuJ-ew-8Qg" firstAttribute="leading" secondItem="v7X-Nt-Dmn" secondAttribute="leading" id="hG3-aA-aBd"/>
+                            <constraint firstItem="HLv-Bc-Vbs" firstAttribute="top" secondItem="uuJ-ew-8Qg" secondAttribute="bottom" constant="32" id="tt5-HC-hxB"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="v7X-Nt-Dmn"/>
+                    </view>
+                    <connections>
+                        <outlet property="image" destination="3eJ-iS-CzX" id="1zx-Qx-v8o"/>
+                        <outlet property="scrollView" destination="HLv-Bc-Vbs" id="jVh-0K-ZcC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WGw-0w-oGe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="37.600000000000001" y="2189.9550224887557"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="1GX-aR-LRr">

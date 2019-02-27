@@ -17,6 +17,11 @@ class PhotosViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     var valueToPass: UIImage?
     
+    //PhotoCell
+    
+    var data = [URL]()
+
+    
     //link to the tableView
     @IBOutlet weak var tableView: UITableView!
     
@@ -32,10 +37,52 @@ class PhotosViewController: UIViewController, UITableViewDelegate, UITableViewDa
         getData()
     }
     
+    //*** When using sticky headView, the indexPath.row becomes indexPath.section
+    //have to use section in place for rows
+    //"!!!" denotes reuired for sticky headers
     
-    //returns number of cells on the tableView
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    //!!!returns number of sections to be presented
+    func numberOfSections(in tableView: UITableView) -> Int {
         return posts.count
+    }
+    
+    
+    //!!!returns number of cells each section will have.
+    //Almost always it's 1, unless you want duplicates of one item or even derivatives of one item
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    //!!!configures the actual headerView for the stickyView sections
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        //add a headerView
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: 320, height: 50))
+        headerView.backgroundColor = UIColor(white: 1, alpha: 0.9)
+        
+        //create a profile pic view
+        let profileView = UIImageView(frame: CGRect(x: 10, y: 10, width: 30, height: 30))
+        profileView.clipsToBounds = true
+        profileView.layer.cornerRadius = 15;
+        profileView.layer.borderColor = UIColor(white: 0.7, alpha: 0.8).cgColor
+        profileView.layer.borderWidth = 1;
+        
+        // Set the avatar for profile pic view and add to subView
+        profileView.af_setImage(withURL: URL(string: "https://api.tumblr.com/v2/blog/humansofnewyork.tumblr.com/avatar")!)
+        headerView.addSubview(profileView)
+        
+        // Add a UILabel and add to subView
+        let label = UILabel(frame: CGRect(x: 50, y: 10, width: 300, height: 30))
+        let date = posts[section]
+        label.text = date["date"] as? String
+        headerView.addSubview(label)
+        
+        return headerView
+    }
+    
+    //!!!returns the height for header section
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40
     }
     
     
@@ -46,7 +93,7 @@ class PhotosViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let cell = tableView.dequeueReusableCell(withIdentifier: "PhotoCell") as! PhotoCell
         
         //grabbing the elements from posts as individual post
-        let post = posts[indexPath.row]
+        let post = posts[indexPath.section]
         
         if let photos = post["photos"] as? [[String: Any]]{ //[[String : Any]] list of String: Any dict
             
@@ -59,7 +106,6 @@ class PhotosViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return cell
     }
     
-    
     //parses the JSON dict and returns the photo URL only
     func returnsURL(with pas_Dict: [[String:Any]]) -> URL{
         //digging deeper for the photo url
@@ -68,6 +114,8 @@ class PhotosViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let originalSize = photo["original_size"] as! [String: Any] // [String: Any] single pair
         let urlString = originalSize["url"] as! String // exporting value of String key as String
         let url = URL(string: urlString) // turning it into an URL for Alamofire
+        
+        data.append(url!)
         
         return url!
     }
@@ -79,7 +127,7 @@ class PhotosViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let cell = sender as! UITableViewCell
         let indexPath = tableView.indexPath(for: cell)!
         
-        let post = posts[indexPath.row]
+        let post = posts[indexPath.section]
         
         destinationVC.passedDict = post
         

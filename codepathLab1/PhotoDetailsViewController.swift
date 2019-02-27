@@ -30,5 +30,17 @@ class PhotoDetailsViewController: UIViewController {
             detailImageView.af_setImage(withURL: url)
         }
     }
-
+    
+    
+    @IBAction func tapGesture(_ sender: UITapGestureRecognizer) {
+        
+        performSegue(withIdentifier: "FullScreenPhotoViewController", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationVC = segue.destination as! FullScreenPhotoViewController
+        
+        destinationVC.img = detailImageView.image
+    }
+    
 }
